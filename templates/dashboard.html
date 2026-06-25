@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        📝 My Blog
+    </div>
+
+    <div class="navbar-right">
+        <span>👋 {{ user }}</span>
+
+        <a href="{{ url_for('logout') }}">
+            <button>Logout</button>
+        </a>
+    </div>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+    <!-- CREATE POST -->
+    <div class="form-box">
+        <h2>Create Post</h2>
+
+        <form method="POST" action="{{ url_for('create') }}">
+
+            <input type="text" name="title" placeholder="Title" required>
+
+            <textarea name="content" placeholder="Content" required></textarea>
+
+            <button type="submit">Create</button>
+
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- POSTS -->
+    <h2>Posts</h2>
+
+    {% for post in posts %}
+        <div class="post-box">
+
+            <!-- TITLE -->
+            <h3>{{ post[0] }}</h3>
+
+            <!-- CONTENT -->
+            <p>{{ post[1] }}</p>
+
+            <!-- AUTHOR -->
+            <small>By: {{ post[2] }}</small>
+
+            <!-- DELETE FORM -->
+            <form method="POST" action="{{ url_for('delete_p') }}">
+
+                <input type="hidden" name="title" value="{{ post[0] }}">
+                <input type="hidden" name="author" value="{{ post[2] }}">
+
+                <button type="submit">🗑️ Delete</button>
+
+            </form>
+
+        </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
