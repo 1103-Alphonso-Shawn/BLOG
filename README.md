@@ -26,5 +26,10 @@ Users can register, log in, create posts, and delete their own posts.
 
 ---
 
-## 📂 Project Structure
+## 📌 Future Improvements
+Edit posts feature
+Better UI design
+Make Delete more secure 
+Make register tell user to password is strong
+
 
